@@ -619,9 +619,7 @@ public class Element implements dObject {
                 return Element.FALSE.getAttribute(attribute.fulfill(1));
             }
         });
-        TagRunnable r = registeredTags.get("contains_any_case_sensitive").clone();
-        r.name = null;
-        registerTag("contains_any_case_sensitive_text", r);
+        registerTag("contains_any_case_sensitive_text", registeredTags.get("contains_any_case_sensitive"));
 
         // <--[tag]
         // @attribute <el@element.contains_any_text[<element>|...]>
@@ -652,9 +650,7 @@ public class Element implements dObject {
                 return Element.FALSE.getAttribute(attribute.fulfill(1));
             }
         });
-        r = registeredTags.get("contains_any").clone();
-        r.name = null;
-        registerTag("contains_any_text", r);
+        registerTag("contains_any_text", registeredTags.get("contains_any"));
 
         // <--[tag]
         // @attribute <el@element.contains_case_sensitive_text[<element>]>
@@ -681,9 +677,7 @@ public class Element implements dObject {
                 else return new Element("false").getAttribute(attribute.fulfill(1));
             }
         });
-        r = registeredTags.get("contains_case_sensitive").clone();
-        r.name = null;
-        registerTag("contains_case_sensitive_text", r);
+        registerTag("contains_case_sensitive_text", registeredTags.get("contains_case_sensitive"));
 
         // <--[tag]
         // @attribute <el@element.contains_text[<element>]>
@@ -713,15 +707,19 @@ public class Element implements dObject {
                     if (Pattern.compile(contains.substring(("regex:").length()), Pattern.CASE_INSENSITIVE).matcher(element).matches())
                         return new Element("true").getAttribute(attribute.fulfill(1));
                     else return new Element("false").getAttribute(attribute.fulfill(1));
-                }
-                else if (element.toLowerCase().contains(contains.toLowerCase()))
+                } else {
+                    dList list = dList.valueOf(CoreUtilities.toLowerCase(attribute.getContext(1)));
+                    String ellow = CoreUtilities.toLowerCase(element);
+                    for (String list_element : list) {
+                        if (!ellow.contains(list_element)) {
+                            return new Element("false").getAttribute(attribute.fulfill(1));
+                        }
+                    }
                     return new Element("true").getAttribute(attribute.fulfill(1));
-                else return new Element("false").getAttribute(attribute.fulfill(1));
+                }
             }
         });
-        r = registeredTags.get("contains").clone();
-        r.name = null;
-        registerTag("contains_text", r);
+        registerTag("contains_text", registeredTags.get("contains"));
 
 
         // <--[tag]
