@@ -723,6 +723,29 @@ public class Element implements dObject {
         r.name = null;
         registerTag("contains_text", r);
 
+        // <--[tag]
+        // @attribute <el@element.contains_all[<element>|...]>
+        // @returns Element(Boolean)
+        // @group string checking
+        // @description
+        // Returns whether the element contains all of the specified strings, case insensitive.
+        // -->
+        registerTag("contains_all", new TagRunnable() {
+            @Override
+            public String run(Attribute attribute, dObject object) {
+                String element = ((Element) object).element;
+                String contains = attribute.getContext(1);
+                dList list = dList.valueOf(CoreUtilities.toLowerCase(attribute.getContext(1)));
+                String ellow = CoreUtilities.toLowerCase(element);
+                for (String list_element : list) {
+                    if (!ellow.contains(list_element)) {
+                        return new Element("false").getAttribute(attribute.fulfill(1));
+                    }
+                }
+                return new Element("true").getAttribute(attribute.fulfill(1));
+            }
+        });
+
 
         // <--[tag]
         // @attribute <el@element.ends_with[<element>]>
