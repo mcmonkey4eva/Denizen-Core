@@ -327,7 +327,6 @@ public class dList extends ArrayList<String> implements dObject {
                 return new Element(list.toString()).getAttribute(attribute.fulfill(1));
             }
         });
-        registerTag("randomized", registeredTags.get("randomize"));
 
         // <--[tag]
         // @attribute <li@list.space_separated>
