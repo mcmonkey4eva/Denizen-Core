@@ -309,6 +309,27 @@ public class dList extends ArrayList<String> implements dObject {
 
     public static void registerTags() {
         // <--[tag]
+        // @attribute <li@list.randomize>
+        // @returns Element
+        // @description
+        // returns a new list, with it's items reodered randomly.
+        // EG <li@1|2|3.randomize> could return li@1|2|3, li@2|1|3, li@3|2|1, li@2|3|1, li@3|1|2 OR li@1|3|2.
+        // -->
+
+        registerTag("randomize", new TagRunnable() {
+            @Override
+            public String run(Attribute attribute, dObject object) {
+                dList list = (dList) object;
+                if (((dList) object).isEmpty()) {
+                    return new Element("li@").getAttribute(attribute.fulfill(1));
+                }
+                Collections.shuffle(list, new Random(System.currentTimeMillis()));
+                return new Element(list.toString()).getAttribute(attribute.fulfill(1));
+            }
+        });
+        registerTag("randomized", registeredTags.get("randomize"));
+
+        // <--[tag]
         // @attribute <li@list.space_separated>
         // @returns Element
         // @description
