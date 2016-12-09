@@ -158,6 +158,18 @@ public abstract class CommandRegistry implements dRegistry {
         //   - default:
         //     - debug log "Success!"
 
+		// @usage
+		// Use for dynamically choosing a case.
+		// - choose "<context.entity.entity_type>":
+		//   - case "zombie":
+		//     - narrate "You slayed an undead zombie!"
+		//   - case "skeleton":
+		//     - narrate "You knocked the bones out of a skeleton!"
+		//   - case "Creeper":
+		//     - narrate "You didn't give that creeper a chance to explode!"
+		//   - default:
+		//     - narrate "You killed a <context.entity.entity_type.to_titlecase>!"
+
         // -->
         registerCoreMember(ChooseCommand.class,
                 "choose", "choose [<option>] [<cases>]", 1);
