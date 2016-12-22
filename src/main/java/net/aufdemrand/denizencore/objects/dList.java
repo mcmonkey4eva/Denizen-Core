@@ -13,7 +13,7 @@ import net.aufdemrand.denizencore.tags.Attribute;
 import net.aufdemrand.denizencore.tags.TagContext;
 import net.aufdemrand.denizencore.tags.core.EscapeTags;
 import net.aufdemrand.denizencore.utilities.CoreUtilities;
-import net.aufdemrand.denizencore.utilities.NaturalOrderComparator;
+import net.aufdemrand.denizencore.utilities.AlphanumericComparator;
 import net.aufdemrand.denizencore.utilities.debugging.dB;
 
 import java.util.*;
@@ -1172,7 +1172,7 @@ public class dList extends ArrayList<String> implements dObject {
             @Override
             public String run(Attribute attribute, dObject object) {
                 dList list = new dList((dList) object);
-                Collections.sort(list, new NaturalOrderComparator());
+                Collections.sort(list, new AlphanumericComparator());
                 return list.getAttribute(attribute.fulfill(1));
             }
         });
