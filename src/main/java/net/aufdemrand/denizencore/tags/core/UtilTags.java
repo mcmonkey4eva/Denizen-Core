@@ -220,6 +220,11 @@ public class UtilTags {
                             .getAttribute(attribute.fulfill(1)));
                 }
 
+                else if (attribute.startsWith("week")) {
+                    event.setReplaced(new Element(calendar.get(Calendar.WEEK_OF_YEAR))
+                            .getAttribute(attribute.fulfill(1)));
+                }
+
                 // <--[tag]
                 // @attribute <util.date.time.week>
                 // @returns Element(Number)
