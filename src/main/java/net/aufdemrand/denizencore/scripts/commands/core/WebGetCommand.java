@@ -6,7 +6,6 @@ import net.aufdemrand.denizencore.exceptions.InvalidArgumentsException;
 import net.aufdemrand.denizencore.objects.Duration;
 import net.aufdemrand.denizencore.objects.Element;
 import net.aufdemrand.denizencore.objects.aH;
-import net.aufdemrand.denizencore.objects.dList;
 import net.aufdemrand.denizencore.scripts.ScriptEntry;
 import net.aufdemrand.denizencore.scripts.commands.AbstractCommand;
 import net.aufdemrand.denizencore.scripts.commands.Holdable;
@@ -101,7 +100,6 @@ public class WebGetCommand extends AbstractCommand implements Holdable {
             }
             in = new BufferedReader(new InputStreamReader(uc.getInputStream()));
             final StringBuilder sb = new StringBuilder();
-            final dList list = new dList();
             // Probably a better way to do this bit.
             while (true) {
                 try {
@@ -109,8 +107,7 @@ public class WebGetCommand extends AbstractCommand implements Holdable {
                     if (temp == null) {
                         break;
                     }
-                    sb.append(temp);
-                    list.add(temp);
+                    sb.append(temp).append("\n");
                 }
                 catch (Exception ex) {
                     break;
@@ -127,7 +124,6 @@ public class WebGetCommand extends AbstractCommand implements Holdable {
                         dB.echoError(e);
                     }
                     scriptEntry.addObject("result", new Element(sb.toString()));
-                    scriptEntry.addObject("list", list);
                     scriptEntry.setFinished(true);
                     return false;
                 }
