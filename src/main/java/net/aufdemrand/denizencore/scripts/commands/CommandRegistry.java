@@ -427,7 +427,7 @@ public abstract class CommandRegistry implements dRegistry {
 
         // <--[command]
         // @Name Webget
-        // @Syntax webget [<url>] (post:<data>)
+        // @Syntax webget [<url>] (post:<data>) (timeout:<duration>/{10s})
         // @Required 1
         // @Stable unstable
         // @Short Gets the contents of a web page.
@@ -442,6 +442,7 @@ public abstract class CommandRegistry implements dRegistry {
         // @Tags
         // <entry[saveName].failed> returns whether the webget failed.
         // <entry[saveName].result> returns the result of the webget, if it did not fail.
+        // <entry[saveName].list> returns a dList of each line from the webget, if it did not fail.
         //
         // @Usage
         // Use to download the google home page.
