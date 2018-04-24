@@ -4,6 +4,7 @@ import net.aufdemrand.denizencore.scripts.ScriptRegistry;
 import net.aufdemrand.denizencore.utilities.CoreUtilities;
 import net.aufdemrand.denizencore.utilities.debugging.dB;
 
+import java.math.BigDecimal;
 import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -561,6 +562,10 @@ public class aH {
 
     public static boolean getBooleanFrom(String arg) {
         return Boolean.valueOf(getStringFrom(arg));
+    }
+
+    public static BigDecimal getBigDecFrom(String arg) {
+            return Element.getBD(arg);
     }
 
     public static double getDoubleFrom(String arg) {
